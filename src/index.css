@@ -1,0 +1,123 @@
+@import 'tailwindcss';
+
+/*
+  As cores e fontes vêm do sizr.config.ts. Em vez de valores fixos, os
+  tokens do Tailwind apontam para variáveis CSS que src/lib/tema.ts
+  preenche no boot — assim você troca a identidade visual inteira
+  editando um arquivo só, sem tocar em nenhuma classe.
+*/
+@theme inline {
+  --color-marca: var(--sizr-marca);
+  --color-marca-hover: var(--sizr-marca-hover);
+  --color-acento: var(--sizr-acento);
+  --color-fundo: var(--sizr-fundo);
+  --color-superficie: var(--sizr-superficie);
+  --color-borda: var(--sizr-borda);
+  --color-texto: var(--sizr-texto);
+  --color-texto-suave: var(--sizr-texto-suave);
+  --color-texto-fraco: var(--sizr-texto-fraco);
+  --color-viewport: var(--sizr-viewport);
+
+  --font-display: var(--sizr-fonte-titulo);
+  --font-sans: var(--sizr-fonte-corpo);
+}
+
+/* Fallbacks: valem enquanto o JS não roda e servem de referência. */
+:root {
+  --sizr-marca: #4df98a;
+  --sizr-marca-hover: #86ffb5;
+  --sizr-acento: #4df98a;
+  --sizr-fundo: #07090d;
+  --sizr-superficie: #10141c;
+  --sizr-borda: #232a36;
+  --sizr-texto: #f5f7fb;
+  --sizr-texto-suave: #b3bac6;
+  --sizr-texto-fraco: #8c95a6;
+  --sizr-viewport: #0a0d12;
+  --sizr-fonte-titulo: system-ui, sans-serif;
+  --sizr-fonte-corpo: system-ui, sans-serif;
+
+  color-scheme: dark;
+}
+
+html {
+  /* Evita o overscroll elástico do mobile revelar uma brecha no topo. */
+  overscroll-behavior-y: none;
+  background-color: var(--sizr-fundo);
+}
+
+/* Brilho da marca no topo + grade fina, com máscara que some no meio da
+   página. É um pseudo-elemento fixo: não entra no fluxo e não repinta. */
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  background:
+    radial-gradient(55rem 38rem at 12% -8%, color-mix(in srgb, var(--sizr-marca) 16%, transparent), transparent 60%),
+    radial-gradient(50rem 34rem at 92% 4%, rgb(78 120 255 / 0.13), transparent 60%),
+    linear-gradient(rgb(255 255 255 / 0.026) 1px, transparent 1px) 0 0 / 100% 58px,
+    linear-gradient(90deg, rgb(255 255 255 / 0.026) 1px, transparent 1px) 0 0 / 58px 100%,
+    var(--sizr-fundo);
+  mask-image: radial-gradient(125% 85% at 50% 0%, #000 40%, transparent 100%);
+}
+
+body {
+  margin: 0;
+  letter-spacing: -0.01em;
+  color: var(--sizr-texto);
+  font-family: var(--sizr-fonte-corpo);
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ── Slider de medida ──────────────────────────────────────────────
+   O preenchimento da trilha é um gradiente inline atualizado pelo
+   React (ver DimensionSlider.tsx); aqui fica só a aparência fixa. */
+.sizr-slider {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 100%;
+  height: 4px;
+  margin: 0;
+  border-radius: 2px;
+  outline: none;
+  cursor: pointer;
+}
+.sizr-slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  box-sizing: border-box;
+  width: 20px;
+  height: 20px;
+  border: 6px solid var(--sizr-marca);
+  border-radius: 50%;
+  background: var(--sizr-fundo);
+  box-shadow: 0 1px 4px rgb(0 0 0 / 0.25);
+  cursor: grab;
+  transition: transform 120ms ease;
+}
+.sizr-slider::-webkit-slider-thumb:hover {
+  transform: scale(1.12);
+}
+.sizr-slider::-webkit-slider-thumb:active {
+  cursor: grabbing;
+}
+.sizr-slider::-moz-range-thumb {
+  box-sizing: border-box;
+  width: 20px;
+  height: 20px;
+  border: 6px solid var(--sizr-marca);
+  border-radius: 50%;
+  background: var(--sizr-fundo);
+  box-shadow: 0 1px 4px rgb(0 0 0 / 0.25);
+  cursor: grab;
+}
+.sizr-slider:focus-visible {
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--sizr-marca) 25%, transparent);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .sizr-slider::-webkit-slider-thumb {
+    transition: none;
+  }
+}

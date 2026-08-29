@@ -1,0 +1,31 @@
+{
+  "name": "sizr",
+  "private": true,
+  "version": "0.1.0",
+  "type": "module",
+  "description": "Configurador 3D de produto sob medida com orcamento via WhatsApp. Sem backend.",
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc -b && vite build",
+    "preview": "vite preview",
+    "typecheck": "tsc -b --noEmit",
+    "test": "node --test"
+  },
+  "dependencies": {
+    "@react-three/fiber": "^9.3.0",
+    "ogl": "^1.0.11",
+    "react": "^19.2.0",
+    "react-dom": "^19.2.0",
+    "three": "^0.185.1"
+  },
+  "devDependencies": {
+    "@tailwindcss/vite": "^4.1.14",
+    "@types/react": "^19.2.2",
+    "@types/react-dom": "^19.2.1",
+    "@types/three": "^0.185.0",
+    "@vitejs/plugin-react": "^5.0.4",
+    "tailwindcss": "^4.1.14",
+    "typescript": "~5.9.3",
+    "vite": "^7.1.9"
+  }
+}
