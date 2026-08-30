@@ -3,6 +3,7 @@ import type { SizrConfig } from './types/config';
 import { GeradorEmbed } from './components/GeradorEmbed';
 import { BotaoEspecular } from './components/BotaoEspecular';
 import { CartaoCometa } from './components/CartaoCometa';
+import { PerguntaProduto } from './components/PerguntaProduto';
 import { linkWhatsApp } from './lib/whatsapp';
 
 /* ── Edite estes valores ─────────────────────────────────────────────
@@ -50,6 +51,20 @@ const configDemo: SizrConfig = {
     };
   }),
 };
+
+/* Os ramos que a página atende. Existem por reconhecimento — quem chega
+   se acha na lista — e por busca: são as palavras que essa gente digita
+   no Google. */
+const segmentos = [
+  'marcenaria',
+  'vidraçaria',
+  'serralheria',
+  'gráfica',
+  'embalagem',
+  'marmoraria',
+  'toldos',
+  'comunicação visual',
+];
 
 const contato = (assunto: string) =>
   linkWhatsApp(WA_VENDAS, `Olá! Vim pelo Sizr. Quero saber sobre ${assunto}.`);
@@ -215,7 +230,7 @@ export default function App() {
           </p>
 
           <div className="mt-8">
-            <BotaoEspecular href="#embed">Ver funcionando</BotaoEspecular>
+            <BotaoEspecular href="#embed">Gerar o meu grátis</BotaoEspecular>
           </div>
         </section>
 
@@ -230,6 +245,8 @@ export default function App() {
             configComPreco={configDemo}
             linkPro={GUMROAD_PRO}
           />
+
+          <PerguntaProduto numero={WA_VENDAS} segmentos={segmentos} />
         </section>
 
         <section id="planos" className="scroll-mt-20 border-t border-borda/70 pt-12">
@@ -291,7 +308,8 @@ export default function App() {
             ))}
           </div>
           <p className="mt-4 text-[13px] text-texto-fraco">
-            Nenhum dos dois tem mensalidade. Precisa de um formato que ainda não existe?{' '}
+            Nenhum dos dois tem mensalidade, e o Pro tem reembolso em até 7 dias. Precisa de um
+            formato que ainda não existe?{' '}
             <a href={contato('um formato 3D sob encomenda')} className="text-marca hover:underline">
               fale com a gente
             </a>

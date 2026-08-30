@@ -121,6 +121,32 @@ export function GeradorEmbed({ site, config, configComPreco, linkPro }: Props) {
         <Configurador config={configPrevia} />
       </div>
 
+      {/* Em vez de descrever o Pro, deixa experimentar: o interruptor liga
+        o preço na prévia acima. O código copiado continua sem ele — quem
+        não pagou não leva a funcionalidade junto. */}
+    <div className="flex flex-wrap items-center justify-between gap-3 rounded-[14px] border border-dashed border-borda p-4">
+      <label className="flex cursor-pointer items-center gap-2.5">
+        <input
+          type="checkbox"
+          checked={comPreco}
+          onChange={(e) => setComPreco(e.target.checked)}
+          className="size-4 accent-[var(--sizr-marca)]"
+        />
+        <span className="text-[13px] text-texto">
+          Ver com preço estimado
+          <span className="ml-2 rounded-full bg-marca/15 px-2 py-0.5 text-[10px] tracking-[0.06em] text-marca">
+            pro
+          </span>
+        </span>
+      </label>
+      <a
+        href={linkPro}
+        className="rounded-full px-4 py-2 font-display text-[12.5px] font-semibold whitespace-nowrap text-marca shadow-[inset_0_0_0_1px_var(--sizr-marca)] hover:bg-marca/10"
+      >
+        Ver o Pro
+      </a>
+    </div>
+
       {/* Os campos ficam fechados: quem chega quer ver a peça girando, não
           preencher formulário. Quem decidiu levar abre e leva. `details`
           nativo — um acordeão em React aqui seria estado à toa. */}
@@ -189,32 +215,6 @@ export function GeradorEmbed({ site, config, configComPreco, linkPro }: Props) {
           </div>
         </div>
       )}
-
-      {/* Em vez de descrever o Pro, deixa experimentar: o interruptor liga
-          o preço na prévia acima. O código copiado continua sem ele — quem
-          não pagou não leva a funcionalidade junto. */}
-      <div className="flex flex-wrap items-center justify-between gap-3 rounded-[14px] border border-dashed border-borda p-4">
-        <label className="flex cursor-pointer items-center gap-2.5">
-          <input
-            type="checkbox"
-            checked={comPreco}
-            onChange={(e) => setComPreco(e.target.checked)}
-            className="size-4 accent-[var(--sizr-marca)]"
-          />
-          <span className="text-[13px] text-texto">
-            Ver com preço estimado
-            <span className="ml-2 rounded-full bg-marca/15 px-2 py-0.5 text-[10px] tracking-[0.06em] text-marca">
-              pro
-            </span>
-          </span>
-        </label>
-        <a
-          href={linkPro}
-          className="rounded-full px-4 py-2 font-display text-[12.5px] font-semibold whitespace-nowrap text-marca shadow-[inset_0_0_0_1px_var(--sizr-marca)] hover:bg-marca/10"
-        >
-          Ver o Pro
-        </a>
-      </div>
 
       <div className="relative rounded-[14px] border border-borda bg-fundo p-4">
         {/* Ícone em vez de texto, como em qualquer bloco de código: o
