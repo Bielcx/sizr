@@ -130,6 +130,27 @@ produtos que **você** vende: ela é a vitrine do que dá para modelar.
 
 ---
 
+## Antes de publicar
+
+Cinco valores precisam deixar de ser exemplo, ou o produto não funciona
+para quem receber o link:
+
+| Onde | O quê |
+| --- | --- |
+| `src/App.tsx` → `SITE` | O endereço real. É ele que entra no `src` do iframe que o cliente cola — errado aqui, o código copiado aponta para o vazio. |
+| `src/App.tsx` → `WA_VENDAS` | Seu WhatsApp, o que recebe os interessados. |
+| `src/App.tsx` → `GUMROAD_PRO` e `GUMROAD_CODIGO` | Os links dos produtos. |
+| `sizr.config.ts` → `whatsapp.numero` | O número da demonstração. |
+| `index.html` → `og:url` e `og:image` | O domínio real, em endereço absoluto. |
+
+O **`public/og.png`** é o cartão que aparece quando alguém cola o link no
+WhatsApp. Ele é uma imagem estática, feita à mão: se você trocar a cor da
+marca ou o texto do título, ele não acompanha — precisa ser refeito. Tem
+que ser PNG ou JPG, porque os raspadores do WhatsApp e do Facebook não
+renderizam SVG nem resolvem caminho relativo.
+
+---
+
 ## Modo embed (iframe)
 
 O mesmo build serve dois usos. Sem parâmetros, ele abre a landing. Com
